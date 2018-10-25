@@ -89,25 +89,25 @@ def handle_text_message(event):
     if text == '/bye':
         if isinstance(event.source, SourceGroup):
             line_bot_api.reply_message(
-                event.reply_token, TextMessage(text='Leaving group'))
+                event.reply_token, TextMessage(text='Dadah beb :*'))
             line_bot_api.leave_group(event.source.group_id)
         elif isinstance(event.source, SourceRoom):
             line_bot_api.reply_message(
-                event.reply_token, TextMessage(text='Leaving group'))
+                event.reply_token, TextMessage(text='Dadah beb :*'))
             line_bot_api.leave_room(event.source.room_id)
         else:
             line_bot_api.reply_message(
-                event.reply_token, TextMessage(text="Bot can't leave from 1:1 chat"))
+                event.reply_token, TextMessage(text="NGGAK BISALAH BAMBANG"))
     if '/joke' and '/j' in text:
         content = jokes()
         line_bot_api.reply_message(
-            event.reply_token, TextMessage(text=content))
+            event.reply_token, TextMessage(text='hilih kintil'))
     
     if '/ping' and '/p' in text:
         line_bot_api.reply_message(
             event.reply_token, TextMessage(text='pong!'))
     if '/help' and '/h' in text:
-        content = 'Available commands:\n/joke - Get Chuck Norris jokes.\n/weather - Gets the current weather in a given location.\n/ping - Send ping command.'
+        content = 'Available commands:\n/joke - RECEH!.\n/weather - Gets the current weather in a given location.\n/ping - Send ping command.'
         line_bot_api.reply_message(
             event.reply_token, TextMessage(text=content))
 
@@ -115,7 +115,7 @@ def handle_text_message(event):
 def handle_join(event):
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text='Thank you for inviting me to this ' + event.source.type))
+        TextSendMessage(text='Thanks for ' + event.source.type))
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
