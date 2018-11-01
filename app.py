@@ -101,13 +101,19 @@ def handle_text_message(event):
     if '/joke' and '/j' in text:
         content = jokes()
         line_bot_api.reply_message(
-            event.reply_token, TextMessage(text='hilih kintil'))
-    
+            event.reply_token, TextMessage(text='Danes ganteng ya'))
+        {
+            type: "image",
+            originalContentUrl: "/1.jpg",
+            previewImageUrl: "/1.jpg"
+        }
+
     if '/ping' and '/p' in text:
         line_bot_api.reply_message(
             event.reply_token, TextMessage(text='pong!'))
-    if '/help' and '/h' in text:
-        content = 'Available commands:\n/joke - RECEH!.\n/weather - Gets the current weather in a given location.\n/ping - Send ping command.'
+
+    elif '/help' and '/h' in text:
+        content = 'Available commands:\n/j - Ada deh.\n/h - mau tau aja.\n/ping - pong.'
         line_bot_api.reply_message(
             event.reply_token, TextMessage(text=content))
 
@@ -115,7 +121,7 @@ def handle_text_message(event):
 def handle_join(event):
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text='Thanks for ' + event.source.type))
+        TextSendMessage(text="Hi, I'm Baymax. Your personal Bot. Thanks for inviting me to this "+ event.source.type + " I love you :*" ))
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
