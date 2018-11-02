@@ -102,12 +102,7 @@ def handle_text_message(event):
         content = jokes()
         line_bot_api.reply_message(
             event.reply_token, TextMessage(text='Danes ganteng ya'))
-        {
-            type: "image",
-            originalContentUrl: "/1.jpg",
-            previewImageUrl: "/1.jpg"
-        }
-
+        
     if '/ping' and '/p' in text:
         line_bot_api.reply_message(
             event.reply_token, TextMessage(text='pong!'))
