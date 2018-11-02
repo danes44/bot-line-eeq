@@ -1,3 +1,4 @@
 line-bot-sdk
 flask
-pyowmpython-dotenv
+pyowm
+python-dotenv
