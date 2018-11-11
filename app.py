@@ -97,7 +97,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
     text = event.message.text
-    ImageSendMessage = event.message.image
+    #ImageSendMessage = event.message.image
     if text == '/bye':
         if isinstance(event.source, SourceGroup):
             line_bot_api.reply_message(
