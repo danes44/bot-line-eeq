@@ -51,7 +51,7 @@ try:
     print(profile.status_message)
 except LineBotApiError as e:
     # error handle
-    ...
+    #...
 # function for create tmp dir for download content
 def make_static_tmp_dir():
     try:
