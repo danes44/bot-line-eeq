@@ -114,9 +114,9 @@ def handle_text_message(event):
         content = jokes()
         line_bot_api.reply_message(
             event.reply_token, TextMessage(text='Danes ganteng ya'))
-    if '/main' and '/m' in text:    
-       line_bot_api.reply_message(
-           event.reply_token, ImageSendMessage(image="file:///C:/Users/VivoBook/Desktop/baymax/1.jpg"))
+    #if '/main' and '/m' in text:    
+    #   line_bot_api.reply_message(
+    #       event.reply_token, ImageSendMessage(image="file:///C:/Users/VivoBook/Desktop/baymax/1.jpg"))
 
     #if '/main' and '/m' in text:
      #   ImageMessage = ImageSendMessage(
