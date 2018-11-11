@@ -43,13 +43,13 @@ handler = WebhookHandler(channel_secret)
 
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
 
-try:
-    profile = line_bot_api.get_profile('<user_id>')
-    print(profile.display_name)
-    print(profile.user_id)
-    print(profile.picture_url)
-    print(profile.status_message)
-except LineBotApiError as e:
+#try:
+#    profile = line_bot_api.get_profile('<user_id>')
+#    print(profile.display_name)
+ #   print(profile.user_id)
+ #   print(profile.picture_url)
+#    print(profile.status_message)
+#except LineBotApiError as e:
     # error handle
     #...
 # function for create tmp dir for download content
