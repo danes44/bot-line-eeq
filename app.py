@@ -128,7 +128,7 @@ def handle_text_message(event):
             event.reply_token, TextMessage(text='pong!'))
 
     elif '/help' and '/h' in text:
-        content = 'Available commands:\n/j - Ada deh.\n/h - mau tau aja.\n/ping - pong.'
+        content = 'Available commands:\n/m - gambar.\n/j - Ada deh.\n/h - mau tau aja.\n/ping - pong.'
         line_bot_api.reply_message(
             event.reply_token, TextMessage(text=content))
 
