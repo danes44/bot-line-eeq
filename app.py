@@ -5,18 +5,11 @@ import urllib.request
 import requests
 
 from flask import Flask, request, abort
-
-#from os.path import join, dirname
-#from dotenv import load_dotenv
-
-#dotenv_path = join(dirname(__file__), '.env')
-#load_dotenv(dotenv_path)
-
 from linebot import (
     LineBotApi, WebhookHandler
 )
 from linebot.exceptions import (
-    InvalidSignatureError
+    InvalidSignatureError, LineBotApiError
 )
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
@@ -30,6 +23,7 @@ from linebot.models import (
     UnfollowEvent, FollowEvent, JoinEvent, LeaveEvent, BeaconEvent
 )
 
+import json
 app = Flask(__name__)
 
 # get variables from your environment variable
@@ -49,7 +43,15 @@ handler = WebhookHandler(channel_secret)
 
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
 
-
+try:
+    profile = line_bot_api.get_profile('<user_id>')
+    print(profile.display_name)
+    print(profile.user_id)
+    print(profile.picture_url)
+    print(profile.status_message)
+except LineBotApiError as e:
+    # error handle
+    ...
 # function for create tmp dir for download content
 def make_static_tmp_dir():
     try:
@@ -59,6 +61,15 @@ def make_static_tmp_dir():
             pass
         else:
             raise
+#def add_groupwhitelist(group_id):
+ #   global dbfb
+  #  ref = db.reference('/whitelist_groups'. dbfb)
+   # group = ref.get()
+   # if group == None:
+    #    group = []
+   # ref.child(str(len(group))).set(str(group_id))
+   # message = "group {} has been whitelisted.".format(str(group_id))
+   # return message
 
 def jokes():
     jokesurl = 'http://api.icndb.com/jokes/random'
@@ -87,7 +98,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
     text = event.message.text
-
+    ImageSendMessage = event.message.image
     if text == '/bye':
         if isinstance(event.source, SourceGroup):
             line_bot_api.reply_message(
@@ -104,12 +115,13 @@ def handle_text_message(event):
         content = jokes()
         line_bot_api.reply_message(
             event.reply_token, TextMessage(text='Danes ganteng ya'))
+    if '/main' and '/m' in text:    
         line_bot_api.reply_message(
-            event.reply_token, ImageMessage(id="file:///C:/Users/VivoBook/Desktop/baymax/1.jpg"))
+           event.reply_token, ImageSendMessage(id="file:///C:/Users/VivoBook/Desktop/baymax/1.jpg"))
 
-    if '/main' and '/m' in text:
-        line_bot_api.reply_message(
-            event.reply_token, ImageMessage(id="file:///C:/Users/VivoBook/Desktop/baymax/1.jpg"))
+    #if '/main' and '/m' in text:
+     #   ImageMessage = ImageSendMessage(
+    #ImageMessage='file:///C:/Users/VivoBook/Desktop/baymax/1.jpg')
        
     if '/ping' and '/p' in text:
         line_bot_api.reply_message(
