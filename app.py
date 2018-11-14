@@ -24,6 +24,8 @@ from linebot.models import (
 )
 
 import json
+import random
+
 app = Flask(__name__)
 
 # get variables from your environment variable
@@ -35,22 +37,12 @@ if channel_secret is None:
 if channel_access_token is None:
     print('Specify LINE_CHANNEL_ACCESS_TOKEN as environment variable.')
     sys.exit(1)
-admin_id = os.environ.get('ADMIN_ID', None)
 
 line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler(channel_secret)
 
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
 
-#try:
-#    profile = line_bot_api.get_profile('<user_id>')
-#    print(profile.display_name)
- #   print(profile.user_id)
- #   print(profile.picture_url)
-#    print(profile.status_message)
-#except LineBotApiError as e:
-    # error handle
-    #...
 # function for create tmp dir for download content
 def make_static_tmp_dir():
     try:
@@ -60,21 +52,18 @@ def make_static_tmp_dir():
             pass
         else:
             raise
-#def add_groupwhitelist(group_id):
- #   global dbfb
-  #  ref = db.reference('/whitelist_groups'. dbfb)
-   # group = ref.get()
-   # if group == None:
-    #    group = []
-   # ref.child(str(len(group))).set(str(group_id))
-   # message = "group {} has been whitelisted.".format(str(group_id))
-   # return message
 
 def jokes():
     jokesurl = 'http://api.icndb.com/jokes/random'
     req = urllib.request.urlopen(jokesurl)
     jokes = json.loads(req.read())
     content = jokes['value']['joke']
+    return content
+
+def tod():
+    word_file = "file:///C:/Users/VivoBook/Desktop/baymax"
+    WORDS = open(word_file).read().splitlines()
+    content = WORDS
     return content
 
 @app.route("/callback", methods=['POST'])
@@ -97,7 +86,6 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
     text = event.message.text
-    #ImageSendMessage = event.message.image
     if text == '/bye':
         if isinstance(event.source, SourceGroup):
             line_bot_api.reply_message(
@@ -110,26 +98,27 @@ def handle_text_message(event):
         else:
             line_bot_api.reply_message(
                 event.reply_token, TextMessage(text="NGGAK BISALAH BAMBANG"))
+
     if '/joke' and '/j' in text:
         content = jokes()
         line_bot_api.reply_message(
-            event.reply_token, TextMessage(text='Danes ganteng ya'))
-    #if '/main' and '/m' in text:    
-    #   line_bot_api.reply_message(
-    #       event.reply_token, ImageSendMessage(image="file:///C:/Users/VivoBook/Desktop/baymax/1.jpg"))
-
-    #if '/main' and '/m' in text:
-     #   ImageMessage = ImageSendMessage(
-    #ImageMessage='file:///C:/Users/VivoBook/Desktop/baymax/1.jpg')
+            event.reply_token, TextMessage(text='danes tu ganteng!'))
        
     if '/ping' and '/p' in text:
         line_bot_api.reply_message(
             event.reply_token, TextMessage(text='pong!'))
+    
+    if '/tod' and '/t' in text:
+        content = tod()
+        line_bot_api.reply_message(
+            event.reply_token, TextMessage(text=content))    
 
     elif '/help' and '/h' in text:
-        content = 'Available commands:\n/m - gambar.\n/j - Ada deh.\n/h - mau tau aja.\n/ping - pong.'
+        content = 'Available commands:\n/t - Truth or Dare.\n/j - Ada deh.\n/h - mau tau aja.\n/ping - pong.'
         line_bot_api.reply_message(
             event.reply_token, TextMessage(text=content))
+
+
 
 @handler.add(JoinEvent)
 def handle_join(event):
