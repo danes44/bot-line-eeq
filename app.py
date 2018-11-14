@@ -61,7 +61,7 @@ def jokes():
     return content
 
 def tod():
-    word_file = "https://github.com/danes44/bot-line-eeq/tod.txt"
+    word_file = "tod.txt"
     WORDS = open(word_file).read().splitlines()
     content = WORDS
     return content
