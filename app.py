@@ -61,7 +61,7 @@ def jokes():
     return content
 
 def tod():
-    word_file = "file:///C:/Users/VivoBook/Desktop/baymax"
+    word_file = "file:///C:/Users/VivoBook/Desktop/baymax/tod.txt"
     WORDS = open(word_file).read().splitlines()
     content = WORDS
     return content
