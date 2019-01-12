@@ -61,10 +61,12 @@ def jokes():
     return content
 
 def tod():
-    word_file = "tod.txt"
-    WORDS = open(word_file).read().splitlines()
-    content = WORDS
-    return content
+   # word_file = "tod.txt"
+   # WORDS = open(word_file).read().splitlines()
+   # content = WORDS
+   # return content
+   yolo = ["truth","dare"]
+   random.choice(yolo)
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -97,7 +99,7 @@ def handle_text_message(event):
             line_bot_api.leave_room(event.source.room_id)
         else:
             line_bot_api.reply_message(
-                event.reply_token, TextMessage(text="NGGAK BISALAH BAMBANG"))
+                event.reply_token, TextMessage(text="NGGAK BISALAH GOBLOK!"))
 
     if '/joke' and '/j' in text:
         content = jokes()
@@ -109,7 +111,7 @@ def handle_text_message(event):
             event.reply_token, TextMessage(text='pong!'))
     
     if '/tod' and '/t' in text:
-        content = tod()
+        content = tod
         line_bot_api.reply_message(
             event.reply_token, TextMessage(text=content))    
 
