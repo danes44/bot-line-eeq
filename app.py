@@ -66,7 +66,9 @@ def tod():
    # content = WORDS
    # return content
    yolo = ["truth","dare"]
-   random.choice(yolo)
+   random.choices(yolo)
+   content = yolo
+   return content
 
 @app.route("/callback", methods=['POST'])
 def callback():
