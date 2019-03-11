@@ -106,7 +106,7 @@ def handle_text_message(event):
     if '/joke' and '/j' in text:
         content = jokes()
         line_bot_api.reply_message(
-            event.reply_token, TextMessage(text='danes tu ganteng!'))
+            event.reply_token, TextMessage(text='HEH BABI YA KAMU!'))
        
     if '/ping' and '/p' in text:
         line_bot_api.reply_message(
