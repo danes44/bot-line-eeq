@@ -103,10 +103,15 @@ def handle_text_message(event):
             line_bot_api.reply_message(
                 event.reply_token, TextMessage(text="NGGAK BISALAH GOBLOK!"))
 
+    if '/kejutan' and '/k' in text:
+        content = jokes()
+        line_bot_api.reply_message(
+            event.reply_token, TextMessage(text='inne tu payah lhoo!'))
+
     if '/joke' and '/j' in text:
         content = jokes()
         line_bot_api.reply_message(
-            event.reply_token, TextMessage(text='HEH BABI YA KAMU!'))
+            event.reply_token, TextMessage(text='danes tu ganteng lhoo!'))
        
     if '/ping' and '/p' in text:
         line_bot_api.reply_message(
@@ -118,7 +123,7 @@ def handle_text_message(event):
             event.reply_token, TextMessage(text=content))    
 
     elif '/help' and '/h' in text:
-        content = 'Available commands:\n/t - Truth or Dare.\n/j - Ada deh.\n/h - mau tau aja.\n/ping - pong.'
+        content = 'Available commands:\n/k - kejutan.\n/t - Truth or Dare.\n/j - Ada deh.\n/h - mau tau aja.\n/ping - pong.'
         line_bot_api.reply_message(
             event.reply_token, TextMessage(text=content))
 
